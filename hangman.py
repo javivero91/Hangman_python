@@ -1,19 +1,11 @@
-# Problem Set 2, hangman.py
 # Name: José Vivero
-# Collaborators: -
-# Time spent: 6h
-
 # Hangman Game
 # -----------------------------------
-# Helper code
-# You don't need to understand this helper code,
-# but you will have to know how to use the functions
-# (so be sure to read the docstrings!)
+
 import random
 import string
 
 WORDLIST_FILENAME = "words.txt"
-
 
 def load_words():
     """
@@ -33,7 +25,6 @@ def load_words():
     return wordlist
 
 
-
 def choose_word(wordlist):
     """
     wordlist (list): list of words (strings)
@@ -41,15 +32,12 @@ def choose_word(wordlist):
     Returns a word from wordlist at random
     """
     return random.choice(wordlist)
+    
 
-# end of helper code
-
-# -----------------------------------
-
-# Load the list of words into the variable wordlist
-# so that it can be accessed from anywhere in the program
+# Load the list of words into the variable wordlist so that it can be accessed from anywhere in the program
 wordlist = load_words()
 
+# -----------------------------------
 
 def is_word_guessed(secret_word, letters_guessed):
     '''
@@ -194,15 +182,7 @@ def hangman(secret_word):
             print('Sorry, that was your last guess. The word was', secret_word)
 
 
-
-# When you've completed your hangman function, scroll down to the bottom
-# of the file and uncomment the first two lines to test
-#(hint: you might want to pick your own
-# secret_word while you're doing your own testing)
-
-
 # -----------------------------------
-
 
 
 def match_with_gaps(my_word, other_word):
@@ -321,13 +301,7 @@ def hangman_with_hints(secret_word):
             break
         if not is_word_guessed(secret_word, letters_guessed) and num_guesses==6:
             print('Sorry, that was your last guess. The word was', secret_word)
-
-
-
-# When you've completed your hangman_with_hint function, comment the two similar
-# lines above that were used to run the hangman function, and then uncomment
-# these two lines and run this file to test!
-# Hint: You might want to pick your own secret_word while you're testing.
+            
 
 
 # if __name__ == "__main__":
