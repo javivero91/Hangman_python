@@ -330,21 +330,9 @@ def hangman_with_hints(secret_word):
 # Hint: You might want to pick your own secret_word while you're testing.
 
 
-
-
-if __name__ == "__main__":
-    # pass
-
-    # To test part 2, comment out the pass line above and
-    # uncomment the following two lines.
+# if __name__ == "__main__":
     
-    #secret_word = choose_word(wordlist)
-    #hangman(secret_word)
+#     secret_word = choose_word(wordlist)
+#     hangman_with_hints(secret_word)
 
-###############
-    
-    # To test part 3 re-comment out the above lines and 
-    # uncomment the following two lines. 
-    
-    secret_word = choose_word(wordlist)
-    hangman_with_hints(secret_word)
+
