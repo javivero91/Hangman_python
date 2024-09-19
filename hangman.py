@@ -4,6 +4,7 @@
 
 import random
 import string
+import streamlit as st
 
 WORDLIST_FILENAME = "words.txt"
 
@@ -218,7 +219,7 @@ def show_possible_matches(my_word):
     print('Possible word matches are:')
     for word in wordlist:
         if match_with_gaps(my_word, word):
-            print(word, end=' ')
+            st.write(word, end=' ')
 
 
 def hangman_with_hints(secret_word):
