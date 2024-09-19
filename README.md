@@ -1,5 +1,8 @@
 # Hangman_python
 In this repository I keep the code for a hangman game in Python. 
+
+To play the game go to: https://hangmanpython-bqvmtsufawu7npysn2ntdt.streamlit.app/
+
 Here are the game rules:
 1. The computer selects a word at random from the list of available words.
 2. The user is given 6 guesses for the whole game and 3 warnings for each attempt at guessing a letter.
