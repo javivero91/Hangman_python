@@ -40,9 +40,8 @@ if st.session_state.game_over:
         st.write('Congratulations! You won! The word is', secret_word + '.','Your score is:', score)
     else:
         st.write("Game Over! The word was:", secret_word)
-
-    if st.button("Play Again"):
-        # Reset session state to start a new game
+    
+    def handle_play_again():
         st.session_state.secret_word = random.choice(wordlist)
         st.session_state.letters_guessed = []
         st.session_state.num_guesses = 0
@@ -50,10 +49,13 @@ if st.session_state.game_over:
         st.session_state.game_over = False
         st.session_state.game_won = False
         st.session_state.display = ''
+    # Button to play again
+    play_again = st.button("Play Again", on_click=handle_play_again)
+
 else:
     # Show game status
     st.write(f'I am thinking of a word that has {len(secret_word)} letters.')
-    st.write('Guessed so far:', get_guessed_word(secret_word, st.session_state.letters_guessed))
+    st.write('Guessed so far: ', get_guessed_word(secret_word, st.session_state.letters_guessed))
     st.write('Available letters:', ' '.join(get_available_letters(st.session_state.letters_guessed)))
     st.write('Guesses left:', 6 - st.session_state.num_guesses)
     st.write('Warnings left:', st.session_state.warnings_left)
@@ -64,33 +66,34 @@ else:
         new_letter = st.session_state.input_letter # Use the key to get the value for text input
         new_letter = new_letter.lower()
         if new_letter:
-            valid, message = valid_letter(new_letter, st.session_state.letters_guessed)
-
-            if not valid:
+            st.session_state.valid, st.session_state.message = valid_letter(new_letter, st.session_state.letters_guessed)
+            if not st.session_state.valid:
                 if new_letter == '*':
-                    st.session_state.display = "Click the 'Hint' button on the left side."
+                    st.session_state.display = "Click the 'Show hint' button on the left panel."
                     #show_possible_matches(get_guessed_word(secret_word, st.session_state.letters_guessed))
                 else:
                     st.session_state.warnings_left -= 1
-                    st.session_state.display = f"Warning: {message}. Warnings left: {st.session_state.warnings_left}"
+                    st.session_state.display = f"Warning: {st.session_state.message} Warnings left: {st.session_state.warnings_left}"
 
                 if st.session_state.warnings_left == 0:
                     st.session_state.num_guesses += 1
                     st.session_state.display = 'You lost one guess due to warnings. Guesses left:', 6 - st.session_state.num_guesses
             else:
                 st.session_state.letters_guessed.append(new_letter)
+                #st.session_state.valid, st.session_state.message = valid_letter(new_letter, st.session_state.letters_guessed)
+                #st.write(st.session_state.letters_guessed, st.session_state.valid, st.session_state.message)
                 st.session_state.warnings_left = 3
-                st.session_state.display = ''
+                #st.session_state.display = ''
 
                 if new_letter in secret_word:
-                    st.session_state.display = "Correct guess!"
+                    st.session_state.display = f"Correct! The letter '{new_letter}' is in the word."
                 else:
                     if new_letter in 'aeiou':
                         st.session_state.num_guesses += 2
-                        st.session_state.display = f"Incorrect guess. The letter '{new_letter}' is not in the word."
+                        st.session_state.display = f"Incorrect guess. The vowel '{new_letter}' is not in the word. You loose {2} guesses"
                     else:
                         st.session_state.num_guesses += 1
-                        st.session_state.display = f"Incorrect guess. The letter '{new_letter}' is not in the word."
+                        st.session_state.display = f"Incorrect guess. The consonant '{new_letter}' is not in the word. You loose {1} guess"
 
             # Check if the user has won or lost
             if is_word_guessed(secret_word, st.session_state.letters_guessed):
@@ -99,9 +102,11 @@ else:
                 
             elif st.session_state.num_guesses >= 6:
                 st.session_state.game_over = True
+        # Reset the input so that entering the same letter triggers the callback function
+        st.session_state.input_letter = ''
 
     # User input that will be passed to the callback function
-    new_letter = st.text_input('Write a letter', on_change = handle_enter, key='input_letter')
+    st.text_input('Write a letter', on_change = handle_enter, key='input_letter')
     
     st.write(st.session_state.display)
 
@@ -139,8 +144,8 @@ else:
             st.session_state.message = ''
             st.session_state.hints = ''
 
-
-    if st.button('Reset'):
+    # Callback function to reset game
+    def handle_reset():
         st.session_state.secret_word = random.choice(wordlist)
         st.session_state.letters_guessed = []
         st.session_state.num_guesses = 0
@@ -148,3 +153,7 @@ else:
         st.session_state.game_over = False
         st.session_state.game_won = False
         st.session_state.display = ''
+    # Button to reset game
+    reset = st.button('Reset', on_click=handle_reset)
+    
+        
