@@ -14,7 +14,7 @@ Here are the game rules:
    
    c. the computer penalizes the user (-2 if the wrong guess is a vowel, -1 otherwise) and updates the number of guesses remaining.
    
-   d. the guess is '*', in which case the user is shown all the possible words that can be formed with the information so far. The user is not penalised for this option.
+   d. the user clicks the Show hint button to see all the possible words that can be formed with the information so far. The user is not penalised for this option.
    
 5. The game ends when the user constructs the secret word or when there are no more guesses left.
 6. If the user wins they get a score which is calculated as follows: Total score = (guesses_remaining) x (number unique letters in secret_word).
