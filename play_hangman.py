@@ -90,10 +90,10 @@ else:
                 else:
                     if new_letter in 'aeiou':
                         st.session_state.num_guesses += 2
-                        st.session_state.display = f"Incorrect guess. The vowel '{new_letter}' is not in the word. You loose {2} guesses"
+                        st.session_state.display = f"Incorrect guess. The vowel '{new_letter}' is not in the word. You lose {2} guesses"
                     else:
                         st.session_state.num_guesses += 1
-                        st.session_state.display = f"Incorrect guess. The consonant '{new_letter}' is not in the word. You loose {1} guess"
+                        st.session_state.display = f"Incorrect guess. The consonant '{new_letter}' is not in the word. You lose {1} guess"
 
             # Check if the user has won or lost
             if is_word_guessed(secret_word, st.session_state.letters_guessed):
